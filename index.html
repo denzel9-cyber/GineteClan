@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ginete Clan</title>
+<meta name="description" content="Ginete Clan: the clan's habits, workouts, challenges and chat.">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ginete Clan">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap">
+<script>
+  /* The live app (shared data, sign-in) is the Claude artifact. Installed = straight in. */
+  var APP_URL = 'https://claude.ai/artifact/MdvdisayvRtXpz97NMDSTR';
+  var installed = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true || /[?&]app=1/.test(location.search);
+  if (installed) location.replace(APP_URL);
+</script>
+<style>
+  :root{--bg:#0A0A0B;--surface:#141416;--line:#2A2A2E;--ink:#F1F0EE;--muted:#9A9AA0;--gold:#D4AF37;color-scheme:dark}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{background:radial-gradient(1000px 500px at 50% -160px,rgba(212,175,55,.08),transparent 70%),var(--bg);color:var(--ink);font:15px/1.5 "DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;padding:max(28px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom))}
+  main{max-width:520px;margin:0 auto;display:grid;gap:16px;justify-items:center;text-align:center}
+  .crest{width:132px;height:132px;display:block}
+  h1{font-family:Cinzel,Georgia,serif;letter-spacing:.06em;font-size:34px;margin:0}
+  .sub{color:var(--muted);margin:-8px 0 0;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px 18px;border-radius:3px;border:1px solid var(--gold);background:var(--gold);color:#14110A;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;font-family:inherit}
+  .btn.ghost{background:transparent;color:var(--gold)}
+  .btn[hidden]{display:none}
+  .card{width:100%;text-align:left;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 40%),var(--surface);border:1px solid var(--line);border-radius:3px;padding:16px}
+  .card h2{font-family:Cinzel,Georgia,serif;font-size:15px;letter-spacing:.06em;margin:0 0 8px;color:var(--gold)}
+  .card ol{margin:0;padding-left:20px;display:grid;gap:4px}
+  .note{color:var(--muted);font-size:12.5px;margin:0}
+  b{color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+  <img class="crest" src="icon-512.png" alt="Ginete Clan crest" width="132" height="132">
+  <h1>Ginete Clan</h1>
+  <p class="sub">Habits · Workouts · Challenges · Chat</p>
+  <a class="btn" id="open" href="https://claude.ai/artifact/MdvdisayvRtXpz97NMDSTR">Open Ginete Clan</a>
+  <button class="btn ghost" id="install" hidden>Install the app on this device</button>
+  <section class="card" id="android">
+    <h2>Android phone (Chrome)</h2>
+    <ol><li>Tap <b>Install the app</b> above, or the <b>⋮</b> menu → <b>Install app</b> / <b>Add to Home screen</b>.</li><li>Open <b>Ginete Clan</b> from your home screen.</li></ol>
+  </section>
+  <section class="card" id="iphone">
+    <h2>iPhone (Safari)</h2>
+    <ol><li>Open this page in <b>Safari</b>.</li><li>Tap <b>Share</b> (square with the arrow) → <b>Add to Home Screen</b> → <b>Add</b>.</li><li>Open <b>Ginete Clan</b> from your home screen.</li></ol>
+  </section>
+  <section class="card">
+    <h2>Computer (Chrome or Edge)</h2>
+    <ol><li>Click <b>Install the app</b> above, or the install icon at the right of the address bar.</li></ol>
+  </section>
+  <p class="note">The app opens the clan's live Ginete Clan, so everyone shares the same chat, levels and challenges. The first time, sign in to Claude with the account DG shared Ginete Clan with. Updates arrive by themselves.</p>
+</main>
+<script>
+  var deferred = null, btn = document.getElementById('install');
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; });
+  btn.addEventListener('click', function () { if (!deferred) return; deferred.prompt(); deferred.userChoice.finally(function () { deferred = null; btn.hidden = true; }); });
+  window.addEventListener('appinstalled', function () { btn.hidden = true; });
+  var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  document.getElementById(ios ? 'android' : 'iphone').style.order = 1;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+</script>
+</body>
+</html>
